@@ -18,6 +18,8 @@ Options:
 
 To use [Podman](https://podman.io) instead of Docker, prepend `DOCKER=podman` to the command line to set the `DOCKER` environment variable.
 
+NOTE: With rootful podman you may want to check the [checkpoint/restore functionality](https://podman.io/docs/checkpoint#migrating-the-container)
+
 # Example
 
 Let's migrate a container to another host with all its volumes.
@@ -47,6 +49,10 @@ docker-volumes.sh $CONTAINER load $CONTAINER-volumes.tar
 # Start container
 docker start $CONTAINER
 ```
+
+To get the command used to create a container:
+- podman: `podman container inspect -f '{{ range .Config.CreateCommand }}{{ printf "%s " . }}{{ end }}' $CONTAINER`
+- docker lacks this functionality.
 
 ## Notes
 - This script could have been written in Python or Go, but the tarfile module and the tar package lack support for writing sparse files.
