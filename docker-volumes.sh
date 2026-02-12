@@ -63,7 +63,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ $# -ne 3 || ! $2 =~ ^(save|load)$ ]] ; then
-	echo "Usage: $0 [-v|--verbose] CONTAINER [save|load] TARBALL" >&2
+	echo "Usage: $0 [-v|--verbose] CONTAINER [save|load|list] TARBALL" >&2
 	exit 1
 fi
 
@@ -102,4 +102,6 @@ case "$2" in
 		save_volumes ;;
 	load)
 		load_volumes ;;
+	list)
+		get_volumes ;;
 esac
